@@ -13,8 +13,9 @@ async function main() {
 
     switch (authMethod) {
         case 'app':
-            writeFileSync('key.json',process.env.GOOGLE_APPLICATION_CREDENTIALS)
-            const gcpClient = new Storage({keyFilename: 'key.json'});
+            const fileName = '/tmp/credentials/key.json'
+            writeFileSync(fileName,process.env.GOOGLE_APPLICATION_CREDENTIALS)
+            const gcpClient = new Storage({keyFilename: fileName});
             bucket = gcpClient.bucket(process.env.BUCKET_NAME)
             break;
         default:
